@@ -1,0 +1,62 @@
+$touch-dimension: 48px;
+$checkbox-dimension: 24px;
+$primary: #4683EC;
+$on-surface: #000;
+
+.mdc-checkbox {
+  position: relative;
+  height: $checkbox-dimension;
+  width: $checkbox-dimension;
+}
+
+.mdc-checkbox__icon {
+  color: $on-surface;
+
+  .mdc-checkbox__input:checked ~ & ,
+  .mdc-checkbox__input:indeterminate ~ & {
+    color: $primary;
+  }
+}
+
+.mdc-checkbox__input {
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  left: -$touch-dimension / 4;
+  top: -$touch-dimension / 4;
+  height: $touch-dimension;
+  width: $touch-dimension;
+  z-index: 1;
+  margin: 0;
+}
+
+.mdc-checkbox__ripple {
+  position: absolute;
+  height: $touch-dimension;
+  width: $touch-dimension;
+  left: -$touch-dimension / 4;
+  top: -$touch-dimension / 4;
+  border-radius: 50%;
+  transition: background-color .54s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  .mdc-checkbox__input:hover ~ &,
+  .mdc-checkbox__input:focus ~ & {
+    background-color: rgba($on-surface, 0.12);
+  }
+
+  .mdc-checkbox__input:active ~ & {
+    background-color: rgba($on-surface, 0.18);
+  }
+
+  .mdc-checkbox__input:checked:hover ~ &,
+  .mdc-checkbox__input:indeterminate:hover ~ &,
+  .mdc-checkbox__input:checked:focus ~ &,
+  .mdc-checkbox__input:indeterminate:focus ~ & {
+    background-color: rgba($primary, 0.12);
+  }
+
+  .mdc-checkbox__input:checked:active ~ &,
+  .mdc-checkbox__input:indeterminate:active ~ & {
+    background-color: rgba($primary, 0.18);
+  }
+}

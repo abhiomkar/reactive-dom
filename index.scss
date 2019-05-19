@@ -1,0 +1,19 @@
+@import './foundation/mdc-checkbox/mdc-checkbox.scss';
+
+html, body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+section {
+  margin: 48px;
+  height: 160px;
+}
+
+h4 {
+  font-weight: normal;
+  font-size: 14px;
+}
