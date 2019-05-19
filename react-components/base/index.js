@@ -13,7 +13,8 @@ export class MDCComponent extends React.Component {
       this.foundation.setGetterHooks(getterHooks);
     }
 
-    this.initialSyncWithDOM();
+    this.foundation.setProps(props);
+    this.foundation.forceRenderer(() => this.setState({}));
   }
 
   get $data() {

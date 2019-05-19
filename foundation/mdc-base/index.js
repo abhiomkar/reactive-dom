@@ -2,6 +2,7 @@ export class MDCFoundation {
   constructor() {
     this.$defaultData = this.getDefaultData();
     this.$data = this.observe(this.$defaultData);
+    this.props = {};
   }
 
   getDefaultData() {}
@@ -18,6 +19,14 @@ export class MDCFoundation {
 
   getterHooks() {}
 
+  setProps(props) {
+    this.props = props;
+  }
+
+  forceRenderer(forceRender) {
+    this.forceRender = forceRender;
+  }
+
   observe(o) {
     const buildProxy = (o) => {
       return new Proxy(o, {
@@ -28,6 +37,11 @@ export class MDCFoundation {
           if (this.setterHooks_ && !!setterMethod) {
             setterMethod(value);
           }
+
+          if (this.forceRender) {
+            this.forceRender();
+          }
+
           // callback(prefix + this.capitalize_(property), value);
           target[property] = value;
           return true;

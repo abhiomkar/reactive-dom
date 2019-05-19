@@ -10,7 +10,7 @@ $on-surface: #000;
 }
 
 .mdc-checkbox__icon {
-  color: $on-surface;
+  color: rgba($on-surface, 0.72);
 
   .mdc-checkbox__input:checked ~ & ,
   .mdc-checkbox__input:indeterminate ~ & {

@@ -49,7 +49,7 @@ export class MDCCheckbox extends MDCComponent {
   }
 
   initialSyncWithDOM() {
-    this.root_.addEventListener('change', () => this.foundation.handleChange());
+    this.root_.addEventListener('change', (event) => this.foundation.handleChange(event));
   }
 
   get selectorInputEl_() {
