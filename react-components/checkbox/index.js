@@ -1,39 +1,19 @@
-import {MDCComponent} from '../base';
 import {MDCCheckboxFoundation} from '../../foundation/mdc-checkbox';
-import {icons} from '../../foundation/mdc-checkbox/constants';
 import React from 'react';
 
-export class MDCCheckbox extends MDCComponent {
+export class MDCCheckbox extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      checked: props.checked,
-      value: props.value,
-      indeterminate: props.indeterminate,
-    }
-
     this.selectorInput = React.createRef();
+
+    this.foundation = new MDCCheckboxFoundation(props);
+    // TODO: set only supported props
+    this.foundation.forceRenderer = () => this.setState({});
+    this.foundation.setSetterHooks(this.getSetterHooks_());
   }
 
-  static defaultProps() {
-    return {
-      checked: false,
-      indeterminate: false,
-      value: '',
-      onChange: () => {},
-    }
-  }
-
-  componentDidMount() {
-    this.foundation.handleMounted();
-  }
-
-  getDefaultFoundation() {
-    return new MDCCheckboxFoundation();
-  }
-
-  getSetterHooks() {
+  getSetterHooks_() {
     return {
       setIndeterminate: (indeterminate) => {
         this.selectorInput.current.indeterminate = indeterminate;
@@ -41,28 +21,22 @@ export class MDCCheckbox extends MDCComponent {
     };
   }
 
-  getGetterHooks() {
-    return {
-      getChecked: () => {
-        return (this.selectorInput && this.selectorInput.current) ?
-            this.selectorInput.current.checked :
-            this.props.checked;
-      },
-      getIndeterminate: (indeterminate) => {
-        return (this.selectorInput && this.selectorInput.current) ?
-          this.selectorInput.current.indeterminate :
-          this.props.indeterminate;
-      },
-    };
+  componentDidMount() {
+    const indeterminate = this.props.indeterminate || false;
+    this.selectorInput.current.indeterminate = indeterminate;
+    this.foundation.setIndeterminate(indeterminate);
   }
 
   render() {
+    const {value, iconString} = this.foundation.store;
+    const {checked} = this.props;
+
     return (
       <div className='mdc-checkbox'>
-        <input ref={this.selectorInput} className='mdc-checkbox__input' type='checkbox' defaultChecked={this.props.checked}
-            onChange={(event) => this.foundation.handleChange(event)} value={this.state.value} />
+        <input ref={this.selectorInput} className='mdc-checkbox__input' type='checkbox' defaultChecked={checked}
+            onChange={(event) => this.foundation.handleChange(event)} value={value} />
         <span className='mdc-checkbox__ripple'></span>
-        <span className='material-icons mdc-checkbox__icon'>{this.foundation.$data.iconString}</span>
+        <span className='material-icons mdc-checkbox__icon'>{iconString}</span>
       </div>
     );
   }

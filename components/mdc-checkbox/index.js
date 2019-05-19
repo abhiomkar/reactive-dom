@@ -8,7 +8,11 @@ export class MDCCheckbox extends MDCComponent {
   }
 
   getDefaultFoundation() {
-    return new MDCCheckboxFoundation();
+    return new MDCCheckboxFoundation({
+      value: this.selectorInputEl_.value,
+      checked: this.selectorInputEl_.checked,
+      indeterminate: this.selectorInputEl_.indeterminate,
+    });
   }
 
   getSetterHooks() {

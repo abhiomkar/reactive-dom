@@ -2,7 +2,16 @@ import {icons, cssClasses} from './constants';
 import {MDCFoundation} from '../mdc-base';
 
 export class MDCCheckboxFoundation extends MDCFoundation {
-  getDefaultData() {
+  getDefaultStore(props) {
+    return {
+      value: props.value,
+      checked: props.checked,
+      indeterminate: props.indeterminate,
+      iconString: icons.OUTLINE_BLANK,
+    };
+  }
+
+  getDefaultProps() {
     return {
       value: '',
       checked: false,
@@ -10,42 +19,36 @@ export class MDCCheckboxFoundation extends MDCFoundation {
     };
   }
 
-  handleMounted() {
-    if (this.props.indeterminate) {
-      this.$data.indeterminate = true;
-    }
-
-    this.$data.iconString = this.$view.getIconString();
-  }
-
   handleChange(event) {
-    this.$data.checked = event.target.checked;
-    this.$data.iconString = this.$view.getIconString();
+    this.store.indeterminate = false;
+    this.store.checked = event.target.checked;
+    this.store.iconString = this.computed.getIconString();
   }
 
   setChecked(checked) {
-    this.$data.checked = checked;
-    this.$data.iconString = this.$view.getIconString();
+    this.store.indeterminate = false;
+    this.store.checked = checked;
+    this.store.iconString = this.computed.getIconString();
   }
 
   setIndeterminate(indeterminate) {
-    this.$data.indeterminate = indeterminate;
-    this.$data.iconString = this.$view.getIconString();
+    this.store.indeterminate = indeterminate;
+    this.store.iconString = this.computed.getIconString();
   }
 
-  get $view() {
+  get computed() {
     return {
       getIconString: () => {
-        if (this.$data.indeterminate) {
+        if (this.store.indeterminate) {
           return icons.INDETERMINATE;
         } else {
-          return this.$data.checked ? icons.CHECK_BOX : icons.OUTLINE_BLANK;
+          return this.store.checked ? icons.CHECK_BOX : icons.OUTLINE_BLANK;
         }
       },
     };
   }
 
   setValue(value) {
-    this.$data.value = value;
+    this.store.value = value;
   }
 }

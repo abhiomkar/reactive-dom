@@ -1,8 +1,10 @@
 export class MDCFoundation {
-  constructor() {
-    this.$defaultData = this.getDefaultData();
-    this.$data = this.observe(this.$defaultData);
-    this.props = {};
+  constructor(props) {
+    this.store = this.observe(this.getDefaultStore(props));
+    this.props = props;
+    this.refs = {};
+    this.getterHooks_ = {};
+    this.setterHooks_ = {};
   }
 
   getDefaultData() {}
@@ -19,11 +21,7 @@ export class MDCFoundation {
 
   getterHooks() {}
 
-  setProps(props) {
-    this.props = props;
-  }
-
-  forceRenderer(forceRender) {
+  set forceRenderer(forceRender) {
     this.forceRender = forceRender;
   }
 
