@@ -1,11 +1,19 @@
 export class MDCFoundation {
   constructor(props) {
-    this.store = this.observe(this.getDefaultStore(props));
     this.props = props;
-    this.refs = {};
+    this.store = this.observe(this.getDefaultStore(props));
+    this.refs = this.getRefs();
     this.getterHooks_ = {};
     this.setterHooks_ = {};
   }
+
+  setRefs(refs) {
+    for (const [refKey, refValue] of Object.entries(refs)) {
+      this.refs[refKey] = refValue;
+    }
+  }
+
+  getRefs() {}
 
   getDefaultData() {}
 
@@ -26,6 +34,7 @@ export class MDCFoundation {
   }
 
   observe(o) {
+    // Refer https://github.com/GoogleChrome/proxy-polyfill
     const buildProxy = (o) => {
       return new Proxy(o, {
         set: (target, property, value) => {
@@ -48,7 +57,7 @@ export class MDCFoundation {
           // return a new proxy if possible, add to prefix
           const out = target[property];
           if (out instanceof Object) {
-            return buildProxy(property + '.', out);
+            return buildProxy(out);
           }
 
           const getterName = 'get' + this.capitalize_(property);

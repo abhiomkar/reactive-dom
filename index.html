@@ -10,20 +10,45 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 <body>
-  <section class="vanilla-example">
-    <h4>Vanilla Checkbox</h4>
+  <section class="framework-example vanilla-example">
+    <h2>Vanilla</h2>
+    <div class="component-demo">
+      <h4>Checkbox</h4>
 
-    <div class="mdc-checkbox">
-      <input class="mdc-checkbox__input" type="checkbox" />
-      <span class="mdc-checkbox__ripple"></span>
-      <span class="material-icons mdc-checkbox__icon">check_box_outline_blank</span>
+      <div class="mdc-checkbox">
+        <input class="mdc-checkbox__input" type="checkbox" />
+        <span class="mdc-checkbox__ripple"></span>
+        <span class="material-icons mdc-checkbox__icon">check_box_outline_blank</span>
+      </div>
     </div>
+
+    <div class="component-demo">
+        <h4>List</h4>
+
+        <ul class="mdc-list">
+          <li class="mdc-list__item" tabindex="0">Item 1</li>
+          <li class="mdc-list__item" tabindex="-1">Item 2</li>
+          <li class="mdc-list__item" tabindex="-1">Item 3</li>
+          <li class="mdc-list__item" tabindex="-1">Item 4</li>
+          <li class="mdc-list__item" tabindex="-1">Item 5</li>
+        </ul>
+      </div>
   </section>
 
-  <section class="react-example">
-    <h4>React Checkbox</h4>
+  <section class="framework-example react-example">
+    <h2>React</h2>
 
-    <div class="react-example-checkbox"></div>
+    <div class="component-demo">
+      <h4>Checkbox</h4>
+
+      <div class="react-example-checkbox"></div>
+    </div>
+
+    <div class="component-demo"></div>
+      <h4>List</h4>
+
+      <div class="react-example-list"></div>
+    </div>
   </section>
   <script src="https://unpkg.com/react/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>

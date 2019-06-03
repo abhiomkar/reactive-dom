@@ -1,0 +1,27 @@
+$primary: #4683EC;
+$on-surface: #000;
+$stroke: 1px solid rgba(0, 0, 0, 0.1);
+
+.mdc-list {
+  border: $stroke;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+}
+
+.mdc-list__item {
+  padding: 0 32px;
+  margin: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  border-bottom: $stroke;
+
+  &:focus {
+    outline: solid 1px rgba($primary, 0.64);
+  }
+}
+
+.mdc-list__item--selected {
+  background: rgba($primary, 0.08);
+}
